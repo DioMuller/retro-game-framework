@@ -1,0 +1,39 @@
+name: Feature Request
+description: Suggest a new feature for the framework.
+title: "[Feature]: "
+labels: ["feature"]
+projects: ["DioMuller/4"]
+body:
+  - type: markdown
+    attributes:
+      value: Please verify if the feature was not requested before and provide as much information when creating a new feature request.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the feature, including any use cases or scenarios.
+      required: true
+
+  - type: dropdown
+    id: platforms
+    attributes:
+      label: For which platforms would you like this feature to be implemented?
+      multiple: true
+      options:
+        - Game Boy
+        - Game Boy Color
+
+  - type: textarea
+    attributes:
+      label: Additional Context and Information
+      description: Additional context or information that might be helpful in understanding the new feature.
+      required: false
+
+  - type: checkboxes
+    id: confirm_issue_not_reported
+    attributes:
+      label: Please confirm that this feature request was not created before.
+      options:
+        - label: I have searched the existing issues and believe this is a new feature request
+          required: true
