@@ -1,0 +1,53 @@
+name: Bug Report
+description: File a bug report on the framework.
+title: "[Bug]: "
+labels: ["bug"]
+projects: ["DioMuller/4"]
+body:
+  - type: markdown
+    attributes:
+      value: Please verify if the issue was not reported before and provide as much information when creating a new bug. Duplicated issues will be closed without notice.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the bug, including any conditions that can lead to it.
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Expected Behavior
+      description: Describe the behavior that was expected instead of the bug.
+      required: true
+
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Which steps should be done to reproduce the bug?
+      required: true
+
+  - type: dropdown
+    id: platforms
+    attributes:
+      label: In which platforms does the bug happen?
+      multiple: true
+      options:
+        - Game Boy
+        - Game Boy Color
+
+  - type: textarea
+    attributes:
+      label: Additional Context and Information
+      description: Additional context or information that might be helpful in understanding and resolving the bug.
+      required: false
+
+  - type: checkboxes
+    id: confirm_issue_not_reported
+    attributes:
+      label: Please confirm that this issue was not reported before.
+      options:
+        - label: I have searched the existing issues and believe this is a new issue
+          required: true
