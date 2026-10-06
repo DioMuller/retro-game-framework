@@ -50,7 +50,7 @@ However, feel free to clone the project and expand or modify it to your own need
 ## Important Links
 
 * To build the framework, check the [Install Document](INSTALL.md)
-* To contribute to the repository, check the [Contributing Document](CONTRIBUTING.md)
+* To contribute to the repository, check the [Contributing Document](.github/CONTRIBUTING.md)
 * To see the changes on each version of the framework, check the [Changelog](CHANGELOG.md) 
 
 ## AI Use
