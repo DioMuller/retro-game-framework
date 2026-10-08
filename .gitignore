@@ -53,3 +53,7 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# Temporary folders and user-specific files
+tools/
+! script/tools/
