@@ -27,6 +27,20 @@ function extract() {
         fi
     fi
 
+    case "$url" in
+        *.zip)
+            extract_zip ${ARCHIVE_FILE} ${EXTRACT_DIR} ;;
+        *.tar.gz)
+            extract_tar_gz ${ARCHIVE_FILE} ${EXTRACT_DIR} ;;
+    esac
+
+    return $?
+}
+
+function extract_zip() {
+    ARCHIVE_FILE=$1
+    EXTRACT_DIR=$2
+
     # Extract the archive using the available tool (tar or unzip)
     if command -v unzip >/dev/null 2>&1; then
         unzip -o "${ARCHIVE_FILE}" -d "${EXTRACT_DIR}"
@@ -35,6 +49,16 @@ function extract() {
     else
         return 1
     fi
+
+    return $?
+}
+
+function extract_tar_gz() {
+    ARCHIVE_FILE=$1
+    EXTRACT_DIR=$2
+
+    # Extract the archive using tar
+    tar -xzf ${ARCHIVE_FILE} -C "${EXTRACT_DIR}" ;;
 
     return $?
 }
