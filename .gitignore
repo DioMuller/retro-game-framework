@@ -56,4 +56,4 @@ dkms.conf
 
 # Temporary folders and user-specific files
 tools/
-! script/tools/
+temp/

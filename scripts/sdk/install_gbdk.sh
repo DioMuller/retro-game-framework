@@ -79,7 +79,7 @@ function install_gbdk() {
     # Cleanup
     ########################################################
 
-    rm -rf "${PROJECT_HOME}/temp"
+   rm -rf "${PROJECT_HOME}/temp"
 
     return 0
 }

@@ -27,11 +27,14 @@ function extract() {
         fi
     fi
 
-    case "$url" in
+    case "$ARCHIVE_FILE" in
         *.zip)
             extract_zip ${ARCHIVE_FILE} ${EXTRACT_DIR} ;;
         *.tar.gz)
             extract_tar_gz ${ARCHIVE_FILE} ${EXTRACT_DIR} ;;
+        *)
+            echo "Unsupported archive format: ${ARCHIVE_FILE}"
+            return 1 ;;
     esac
 
     return $?
@@ -43,7 +46,7 @@ function extract_zip() {
 
     # Extract the archive using the available tool (tar or unzip)
     if command -v unzip >/dev/null 2>&1; then
-        unzip -o "${ARCHIVE_FILE}" -d "${EXTRACT_DIR}"
+        unzip -q -o "${ARCHIVE_FILE}" -d "${EXTRACT_DIR}"
     elif command -v tar >/dev/null 2>&1; then
         tar -xf "${ARCHIVE_FILE}" -C "${EXTRACT_DIR}"
     else
