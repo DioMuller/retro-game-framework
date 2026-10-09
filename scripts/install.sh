@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source "emulator/install_emulicious.sh"
 source "sdk/install_gbdk.sh"
 
 # Cleanup previous install
@@ -11,3 +12,6 @@ fi
 install_gbdk
 
 # Install Emulators
+install_emulicious
+
+rm -rf ../temp
