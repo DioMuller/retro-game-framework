@@ -4,13 +4,13 @@
 # Includes
 ########################################################
 
-SCRIPT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
 
-source "${SCRIPT_ROOT}/../../util/create_directory.sh"
-source "${SCRIPT_ROOT}/../../util/detect_os.sh"
-source "${SCRIPT_ROOT}/../../util/download.sh"
-source "${SCRIPT_ROOT}/../../util/extract.sh"
-source "${SCRIPT_ROOT}/../../util/get_root_direcory.sh"
+source "${SCRIPT_ROOT}/util/create_directory.sh"
+source "${SCRIPT_ROOT}/util/detect_os.sh"
+source "${SCRIPT_ROOT}/util/download.sh"
+source "${SCRIPT_ROOT}/util/extract.sh"
+source "${SCRIPT_ROOT}/util/get_root_direcory.sh"
 
 function install_gbdk() {
     ########################################################

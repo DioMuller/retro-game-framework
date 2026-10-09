@@ -58,7 +58,7 @@ function extract_tar_gz() {
     EXTRACT_DIR=$2
 
     # Extract the archive using tar
-    tar -xzf "${ARCHIVE_FILE}" -C "${EXTRACT_DIR}" ;;
+    tar -xzf "${ARCHIVE_FILE}" -C "${EXTRACT_DIR}"
 
     return $?
 }
