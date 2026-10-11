@@ -5,7 +5,7 @@ function install_gbdk() {
     ########################################################
     # Includes
     ########################################################
-    SCRIPT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
+    SCRIPT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../.."
 
     source "${SCRIPT_ROOT}/util/detect_os.sh"
     source "${SCRIPT_ROOT}/util/download_and_extract.sh"

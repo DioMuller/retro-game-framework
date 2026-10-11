@@ -5,7 +5,7 @@ function install_emulicious() {
     ########################################################
     # Includes
     ########################################################
-    SCRIPT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
+    SCRIPT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../.."
 
     source "${SCRIPT_ROOT}/util/download_and_extract.sh"
     source "${SCRIPT_ROOT}/util/get_root_direcory.sh"
@@ -15,6 +15,7 @@ function install_emulicious() {
     ########################################################
     PROJECT_HOME=$( get_root_directory )
     EMULICIOUS_URL="https://emulicious.net/Emulicious.zip"
+
 
     ########################################################
     # Download and Install Emulicious

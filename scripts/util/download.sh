@@ -29,7 +29,7 @@ function download() {
 
     # Download the file using curl or wget
     if command -v curl >/dev/null 2>&1; then
-        curl -fL --retry 10 "${DOWNLOAD_URL}" -o "${DOWNLOAD_DIR}/$(basename ${DOWNLOAD_URL})"
+        curl -sfL --retry 10 "${DOWNLOAD_URL}" -o "${DOWNLOAD_DIR}/$(basename ${DOWNLOAD_URL})"
     elif command -v wget >/dev/null 2>&1; then
         wget "${DOWNLOAD_URL}" -O "${DOWNLOAD_DIR}/$(basename ${DOWNLOAD_URL})"
     else
