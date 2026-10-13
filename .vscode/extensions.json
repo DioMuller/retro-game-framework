@@ -1,6 +1,11 @@
 {
     "recommendations": [
         "emulicious.emulicious-debugger",
-        "ms-vscode.cpptools"
+        "ms-vscode.cpptools",
+        "ms-vscode.cpp-devtools",
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.cpptools-themes",
+        "ms-vscode.makefile-tools",
+        "shd101wyy.markdown-preview-enhanced"
     ]
 }
