@@ -1,0 +1,31 @@
+{
+    "version": 1,
+    "configurations": [
+        {
+            "name": "Game Boy",
+            "includePath": [
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/tools/gbdk/include"
+            ],
+            "defines": [
+
+            ],
+            "compilerPath": "",
+            "cStandard": "c89",
+            "intelliSenseMode": "gcc-x86"
+        },
+        {
+            "name": "Game Boy Color",
+            "includePath": [
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/tools/gbdk/include"
+            ],
+            "defines": [
+
+            ],
+            "compilerPath": "",
+            "cStandard": "c89",
+            "intelliSenseMode": "gcc-x86"
+        }
+    ]
+}
