@@ -2,4 +2,9 @@
     // IntelliSense comes from c_cpp_properties.json (one configuration per
     // target). Makefile Tools can't read lcc's command lines, so keep it from
     // configuring IntelliSense for this workspace.
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.quickSuggestions": { "other": false, "comments": false, "strings": false },
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.quickSuggestionsDelay": 10,
+    "editor.wordBasedSuggestions": "off"
 }
