@@ -1,3 +1,3 @@
 # Installing the Framework
 
-This document will be updated as soon as the first version of the framework is created.
+Run the script scripts/install.sh to install all the environement automatically.

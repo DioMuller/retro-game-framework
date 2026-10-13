@@ -1,0 +1,5 @@
+{
+    // IntelliSense comes from c_cpp_properties.json (one configuration per
+    // target). Makefile Tools can't read lcc's command lines, so keep it from
+    // configuring IntelliSense for this workspace.
+}

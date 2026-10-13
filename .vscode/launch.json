@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Game Boy (Emulicious)",
+            "type": "emulicious-debugger",
+            "request": "launch",
+            "preLaunchTask": "make gb",
+            "program": "${workspaceFolder}/build/gb/game.gb",
+            "emuliciousPath": "${workspaceFolder}/tools/emulicious",
+            "port": 58870,
+            "stopOnEntry": false
+        },
+        {
+            "name": "Game Boy Color (Emulicious)",
+            "type": "emulicious-debugger",
+            "request": "launch",
+            "preLaunchTask": "make gbc",
+            "program": "${workspaceFolder}/build/gbc/game.gbc",
+            "emuliciousPath": "${workspaceFolder}/tools/emulicious",
+            "port": 58870,
+            "stopOnEntry": false
+        }
+    ]
+}
