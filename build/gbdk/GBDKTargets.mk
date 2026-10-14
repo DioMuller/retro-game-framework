@@ -6,50 +6,50 @@ endif
 endif
 
 # Called by the individual targets below to build a ROM
-build-target: png2asset $(BINS)
+build-target: create-assets $(BINS)
 
 clean-target:
 	rm -rf $(OBJDIR)
 	rm -rf $(DISTDIR)
 	rm -rf $(GENDIR)
 
-gb-clean:
+build-gb-clean:
 	${MAKE} clean-target EXT=gb
-gb:
+build-gb:
 	${MAKE} build-target PORT=sm83 PLAT=gb EXT=gb SPRITES=gbapduck
 
 
-gbc-clean:
+build-gbc-clean:
 	${MAKE} clean-target EXT=gbc
-gbc:
+build-gbc:
 	${MAKE} build-target PORT=sm83 PLAT=gb EXT=gbc SPRITES=gbc
 
 
-pocket-clean:
+build-pocket-clean:
 	${MAKE} clean-target EXT=pocket
-pocket:
+build-pocket:
 	${MAKE} build-target PORT=sm83 PLAT=ap EXT=pocket SPRITES=gbapduck
 
 
-megaduck-clean:
+build-megaduck-clean:
 	${MAKE} clean-target EXT=duck
-megaduck:
+build-megaduck:
 	${MAKE} build-target PORT=sm83 PLAT=duck EXT=duck SPRITES=gbapduck
 
 
-sms-clean:
+build-sms-clean:
 	${MAKE} clean-target EXT=sms
-sms:
+build-sms:
 	${MAKE} build-target PORT=z80 PLAT=sms EXT=sms SPRITES=ggsms
 
 
-gg-clean:
+build-gg-clean:
 	${MAKE} clean-target EXT=gg
-gg:
+build-gg:
 	${MAKE} build-target PORT=z80 PLAT=gg EXT=gg SPRITES=ggsms
 
 
-nes-clean:
+build-nes-clean:
 	${MAKE} clean-target EXT=nes
-nes:
+build-nes:
 	${MAKE} build-target PORT=mos6502 PLAT=nes EXT=nes SPRITES=nes

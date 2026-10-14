@@ -100,7 +100,7 @@ clean:
 	done
 
 # Include available build targets
-include GBDKTargets.mk
+include build/gbdk/GBDKTargets.mk
 
 
 # create necessary directories after Makefile is parsed but before build
@@ -108,42 +108,3 @@ include GBDKTargets.mk
 ifneq ($(strip $(EXT)),)           # Only make the directories if EXT has been set by a target
 	$(info $(shell mkdir -p $(MKDIRS)))
 endif
-
-
-
-# Library Paths
-GBDK_PATH := $(CURDIR)/tools/sdk/gbdk
-
-# Compiler Paths
-LCC := $(GBDK_PATH)/bin/lcc
-PNG2ASSET := $(GBDK_PATH)/bin/png2asset
-
-# Game Definitions
-ROM_NAME := game
-
-FRAMEWORK_SRC := $(wildcard src/*.c)
-OUT := bin/$(ROM_NAME)
-
-gb:
-	# Setup the output directories
-	rm -rf resources
-	mkdir resources
-	mkdir resources/gb
-
-	rm -rf bin	
-	mkdir bin
-
-	# Convert Assets
-	$(PNG2ASSET) -i assets/sprites/*.png -o res/gb/sprites.c -t tiles -f tiles -p 8x8
-
-	# Compile the game
-	$(LCC) -o $(OUT).gb $(FRAMEWORK_SRC)
-
-gbc:
-	rm -rf bin
-	mkdir bin
-	$(LCC) -o $(OUT).gbc $(FRAMEWORK_SRC)
-
-clean:
-	rm -rf res
-	rm -rf bin
