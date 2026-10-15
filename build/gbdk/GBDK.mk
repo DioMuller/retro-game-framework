@@ -17,39 +17,42 @@ TARGETS = gb gbc
 # LCCFLAGS = -debug
 
 # Directory Definitions
-SRCDIR      	= $(CURDIR)/src
-DISTDIR     	= $(CURDIR)/dist
-GENDIR      	= $(CURDIR)/gen/$(EXT)
-OBJDIR      	= $(CURDIR)/obj/$(EXT)
-RESDIR      	= $(CURDIR)/res/$(EXT)
-SPRITEDIR   	= $(RESDIR)/sprites
-TILEDIR     	= $(RESDIR)/tiles
-BINDIR      	= $(CURDIR)/bin/$(EXT)
-MKDIRS      	= $(GENDIR) $(OBJDIR) $(BINDIR)
+SRCDIR      	= src
+INCDIR	  		= include
+DISTDIR     	= dist
+GENDIR      	= gen/$(EXT)
+OBJDIR      	= obj/$(EXT)
+
+BINDIR      	= bin/$(EXT)
+MKDIRS      	= $(OBJDIR) $(BINDIR)
 
 # Build Definitions
-BINS	    	= $(OBJDIR)/$(PROJECTNAME).$(EXT)
+BINS	    	= $(PROJECTNAME).$(EXT)
 ASSETSOURCES 	= $(foreach dir,$(GENDIR),$(notdir $(wildcard $(dir)/*.c))) 
 CSOURCES    	= $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.c))) 
 ASMSOURCES  	= $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.s)))
 OBJS       		= $(ASSETSOURCES:%.c=$(OBJDIR)/%.o) $(CSOURCES:%.c=$(OBJDIR)/%.o) $(ASMSOURCES:%.s=$(OBJDIR)/%.o)
 
-LCCFLAGS += -Wl-j -Wm-yoA -Wm-ya4 -Wb-ext=.rel $(LCCFLAGS_$(EXT)) # This adds the current platform specific LCC Flags
-
-
 # Configure platform specific LCC flags here:
 LCCFLAGS_gb      = -Wm-ys -Wl-yt0x1B -autobank # Set an MBC for banking (1B-ROM+MBC5+RAM+BATT)
 LCCFLAGS_gbc     = -Wm-ys -Wl-yt0x1B -Wm-yC -autobank # Same as .gb with: -Wm-yc (gb & gbc) or Wm-yC (gbc exclusive)
 
+LCCFLAGS += -Wl-j -Wm-yoA -Wm-ya4 -Wb-ext=.rel $(LCCFLAGS_$(EXT)) # This adds the current platform specific LCC Flags
+
+
 all: $(TARGETS)
 
-# Compile .c files in "temp/" to .o object files
-$(OBJDIR)/%.o:	$(GENDIR)/sprites/%.c $(GENDIR)/tiles/%.c 
-	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(GENDIR) -Ires -c -o $@ $@
+# Compile .c files in "sprites" to .o object files
+$(OBJDIR)/%.o:	$(GENDIR)/sprites/%.c 
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(GENDIR) -Ires -c -o $@ $<
+
+# Compile .c files in "sprites" to .o object files
+$(OBJDIR)/%.o:	$(GENDIR)/tiles/%.c 
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(GENDIR) -Ires -c -o $@ $<
 
 # Compile .c files in "src/" to .o object files
 $(OBJDIR)/%.o:	$(SRCDIR)/%.c 
-	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(SRCDIR) -Ires -c -o $@ $<
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(INCDIR) -I$(GENDIR) -Ires -c -o $@ $<
 
 # Compile .s assembly files in "src/" to .o object files
 $(OBJDIR)/%.o:	$(SRCDIR)/%.s
@@ -57,18 +60,8 @@ $(OBJDIR)/%.o:	$(SRCDIR)/%.s
 
 # Link the compiled object files into a .gb ROM file
 $(BINS):	$(OBJS) 
-	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(GENDIR) -o $(BINDIR)/$(PROJECTNAME).$(EXT) $(OBJS) $(GENSOURCES)
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(GENDIR) -o $(BINDIR)/$(PROJECTNAME).$(EXT) $(OBJS)
 
-prepare:
-	mkdir -p $(OBJDIR)
-	mkdir -p $(DISTDIR)
-	mkdir -p $(GENDIR)
-
-clean-all:
-	@echo Cleaning
-	@for target in $(TARGETS); do \
-		$(MAKE) $$target-clean; \
-	done
 
 # Include available build targets
 include build/gbdk/Targets.mk

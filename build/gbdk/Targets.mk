@@ -7,7 +7,8 @@ endif
 
 # Called by the individual targets below to build a ROM
 build-target:
-	sh $(CURDIR)/scripts/sdk/gbdk/create_assets.sh $(EXT)
+	$(CURDIR)/scripts/sdk/gbdk/create_assets.sh $(EXT)
+#	$(MAKE) gbdk-build-target PORT=$(PORT) PLAT=$(PLAT) EXT=$(EXT) SPRITES=$(SPRITES)
 	$(BINS)
 
 clean-target:
