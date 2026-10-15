@@ -1,25 +1,17 @@
+# You can set the name of the .gb ROM file here
+PROJECTNAME :=	game
+TARGETS 	:=	gb gbc
 
-# Library Paths
-GBDK_PATH := $(CURDIR)/tools/sdk/gbdk
+# Include GBDK build targets
+include build/gbdk/GBDK.mk
 
-# Compiler Paths
-LCC := $(GBDK_PATH)/bin/lcc
-
-# Game Definitions
-ROM_NAME := game
-
-FRAMEWORK_SRC := $(wildcard src/*.c)
-OUT := bin/$(ROM_NAME)
+all: $(TARGETS)
 
 gb:
-	rm -rf bin
-	mkdir bin
-	$(LCC) -o $(OUT).gb $(FRAMEWORK_SRC)
+	$(MAKE) build-gb
 
 gbc:
-	rm -rf bin
-	mkdir bin
-	$(LCC) -o $(OUT).gbc $(FRAMEWORK_SRC)
+	$(MAKE) build-gbc
 
 clean:
-	rm -rf bin
+	$(MAKE) clean-target
