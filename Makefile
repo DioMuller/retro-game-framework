@@ -1,11 +1,11 @@
 # You can set the name of the .gb ROM file here
-PROJECTNAME := game
+PROJECTNAME :=	game
+TARGETS 	:=	gb gbc
 
 # Include GBDK build targets
 include build/gbdk/GBDK.mk
 
-all:
-	$(MAKE) all-targets
+all: $(TARGETS)
 
 gb:
 	$(MAKE) build-gb

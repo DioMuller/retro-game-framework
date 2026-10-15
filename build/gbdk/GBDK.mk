@@ -10,7 +10,6 @@ LCC = $(CURDIR)/tools/sdk/gbdk/bin/lcc
 # Set platforms to build here, spaced separated. (These are in the separate Makefile.targets)
 # They can also be built/cleaned individually: "make gg" and "make gg-clean"
 # Possible are: gb gbc pocket megaduck sms gg
-TARGETS = gb gbc
 
 # You can set flags for LCC here
 # For example, you can uncomment the line below to turn on debug output
@@ -38,9 +37,6 @@ LCCFLAGS_gb      = -Wm-ys -Wl-yt0x1B -autobank # Set an MBC for banking (1B-ROM+
 LCCFLAGS_gbc     = -Wm-ys -Wl-yt0x1B -Wm-yC -autobank # Same as .gb with: -Wm-yc (gb & gbc) or Wm-yC (gbc exclusive)
 
 LCCFLAGS += -Wl-j -Wm-yoA -Wm-ya4 -Wb-ext=.rel $(LCCFLAGS_$(EXT)) # This adds the current platform specific LCC Flags
-
-
-all: $(TARGETS)
 
 # Compile .c files in "sprites" to .o object files
 $(OBJDIR)/%.o:	$(GENDIR)/sprites/%.c 
