@@ -5,10 +5,7 @@
 
 # If you move this project you can change the directory 
 # to match your GBDK root directory (ex: GBDK_HOME = "C:/GBDK/"
-GBDK_HOME = $(CURDIR)/tools/sdk/gbdk
-
-PNG2ASSET = $(GBDK_HOME)/bin/png2asset 
-LCC = $(GBDK_HOME)/bin/lcc 
+LCC = $(CURDIR)/tools/sdk/gbdk/bin/lcc 
 
 # Set platforms to build here, spaced separated. (These are in the separate Makefile.targets)
 # They can also be built/cleaned individually: "make gg" and "make gg-clean"
@@ -20,14 +17,14 @@ TARGETS = gb gbc
 # LCCFLAGS = -debug
 
 # Directory Definitions
-SRCDIR      	= src
-DISTDIR     	= dist
-GENDIR      	= gen/$(EXT)/src
-OBJDIR      	= obj/$(EXT)
-RESDIR      	= res/$(EXT)
+SRCDIR      	= $(CURDIR)/src
+DISTDIR     	= $(CURDIR)/dist
+GENDIR      	= $(CURDIR)/gen/$(EXT)
+OBJDIR      	= $(CURDIR)/obj/$(EXT)
+RESDIR      	= $(CURDIR)/res/$(EXT)
 SPRITEDIR   	= $(RESDIR)/sprites
 TILEDIR     	= $(RESDIR)/tiles
-BINDIR      	= bin/$(EXT)
+BINDIR      	= $(CURDIR)/bin/$(EXT)
 MKDIRS      	= $(GENDIR) $(OBJDIR) $(BINDIR)
 
 # Build Definitions
@@ -47,7 +44,7 @@ LCCFLAGS_gbc     = -Wm-ys -Wl-yt0x1B -Wm-yC -autobank # Same as .gb with: -Wm-yc
 all: $(TARGETS)
 
 # Compile .c files in "temp/" to .o object files
-$(OBJDIR)/%.o:	$(GENDIR)/%.c 
+$(OBJDIR)/%.o:	$(GENDIR)/sprites/%.c $(GENDIR)/tiles/%.c 
 	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(GENDIR) -Ires -c -o $@ $@
 
 # Compile .c files in "src/" to .o object files

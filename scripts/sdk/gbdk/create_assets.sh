@@ -21,7 +21,7 @@ for asset in "${SPRITEDIR}"/${PATTERN}; do
     if [ -f "$asset" ]; then
         OUTPUT_FILE="${asset%.png}.c"
         NEW_FILENAME=$(basename -- "$OUTPUT_FILE")
-        echo "Generating asset: ${GENDIR}/sprites/${NEW_FILENAME}"
+        echo "Generating Sprite: sprites/${NEW_FILENAME}"
         ${PNG2ASSET} "${asset}" -use_metafile -c "${GENDIR}/sprites/${NEW_FILENAME}"
     else
         echo "Invalid sprite file: ${asset}"
@@ -35,7 +35,7 @@ for asset in "${TILEDIR}"/${PATTERN}; do
     OUTPUT_FILE="${asset%.png}.c"
         OUTPUT_FILE="${asset%.png}.c"
         NEW_FILENAME=$(basename -- "$OUTPUT_FILE")
-        echo "Generating asset: ${GENDIR}/tiles/${NEW_FILENAME}"
+        echo "Generating Tile: tiles/${NEW_FILENAME}"
         ${PNG2ASSET} "${asset}" -use_metafile -c "${GENDIR}/tiles/${NEW_FILENAME}"
     else
         echo "Invalid tile file: ${asset}"
