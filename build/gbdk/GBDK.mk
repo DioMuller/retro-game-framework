@@ -5,7 +5,7 @@
 
 # If you move this project you can change the directory 
 # to match your GBDK root directory (ex: GBDK_HOME = "C:/GBDK/"
-GBDK_HOME := $(CURDIR)/tools/sdk/gbdk
+GBDK_HOME = $(CURDIR)/tools/sdk/gbdk
 
 PNG2ASSET = $(GBDK_HOME)/bin/png2asset 
 LCC = $(GBDK_HOME)/bin/lcc 
@@ -13,57 +13,54 @@ LCC = $(GBDK_HOME)/bin/lcc
 # Set platforms to build here, spaced separated. (These are in the separate Makefile.targets)
 # They can also be built/cleaned individually: "make gg" and "make gg-clean"
 # Possible are: gb gbc pocket megaduck sms gg
-TARGETS=gb gbc
+TARGETS = gb gbc
 
 # You can set flags for LCC here
 # For example, you can uncomment the line below to turn on debug output
 # LCCFLAGS = -debug
 
-SRCDIR      := src
-DISTDIR     := dist
-OBJDIR      := obj/$(EXT)
-RESDIR      := res/$(EXT)
-GENDIR      := gen/$(EXT)/src
-BINDIR      := bin/$(EXT)
-MKDIRS      := $(GENDIR) $(OBJDIR) $(BINDIR)
-BINS	    := $(OBJDIR)/$(PROJECTNAME).$(EXT)
-CSOURCES    := $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.c))) 
-GENSOURCES  := $(foreach dir,$(GENDIR), $(wildcard $(dir)/*.c))
-ASMSOURCES  := $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.s)))
-OBJS       	:= $(CSOURCES:%.c=$(OBJDIR)/%.o) $(ASMSOURCES:%.s=$(OBJDIR)/%.o)
+# Directory Definitions
+SRCDIR      	= src
+DISTDIR     	= dist
+GENDIR      	= gen/$(EXT)/src
+OBJDIR      	= obj/$(EXT)
+RESDIR      	= res/$(EXT)
+SPRITEDIR   	= $(RESDIR)/sprites
+TILEDIR     	= $(RESDIR)/tiles
+BINDIR      	= bin/$(EXT)
+MKDIRS      	= $(GENDIR) $(OBJDIR) $(BINDIR)
+
+# Build Definitions
+BINS	    	= $(OBJDIR)/$(PROJECTNAME).$(EXT)
+ASSETSOURCES 	= $(foreach dir,$(GENDIR),$(notdir $(wildcard $(dir)/*.c))) 
+CSOURCES    	= $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.c))) 
+ASMSOURCES  	= $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.s)))
+OBJS       		= $(ASSETSOURCES:%.c=$(OBJDIR)/%.o) $(CSOURCES:%.c=$(OBJDIR)/%.o) $(ASMSOURCES:%.s=$(OBJDIR)/%.o)
 
 LCCFLAGS += -Wl-j -Wm-yoA -Wm-ya4 -Wb-ext=.rel $(LCCFLAGS_$(EXT)) # This adds the current platform specific LCC Flags
 
 
 # Configure platform specific LCC flags here:
 LCCFLAGS_gb      = -Wm-ys -Wl-yt0x1B -autobank # Set an MBC for banking (1B-ROM+MBC5+RAM+BATT)
-LCCFLAGS_gbc     = -Wm-ys -Wl-yt0x1B -Wm-yc -autobank # Same as .gb with: -Wm-yc (gb & gbc) or Wm-yC (gbc exclusive)
+LCCFLAGS_gbc     = -Wm-ys -Wl-yt0x1B -Wm-yC -autobank # Same as .gb with: -Wm-yc (gb & gbc) or Wm-yC (gbc exclusive)
 
 all: $(TARGETS)
 
-$(GENDIR)/sprites/%.c:	$(RESDIR)/sprites/%.png
-	$(PNG2ASSET) $< -use_metafile -c $@
-
-$(GENDIR)/tiles/%.c:	$(RESDIR)/tiles/%.png
-	$(PNG2ASSET) $< -use_metafile -c $@
+# Compile .c files in "temp/" to .o object files
+$(OBJDIR)/%.o:	$(GENDIR)/%.c 
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(GENDIR) -Ires -c -o $@ $@
 
 # Compile .c files in "src/" to .o object files
 $(OBJDIR)/%.o:	$(SRCDIR)/%.c 
-	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(GENDIR) -Ires -c -o $@ $<
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(SRCDIR) -Ires -c -o $@ $<
 
 # Compile .s assembly files in "src/" to .o object files
 $(OBJDIR)/%.o:	$(SRCDIR)/%.s
 	$(LCC) $(LCCFLAGS) $(CFLAGS) -c -o $@ $<
 
-# If needed, compile .c files in "src/" to .s assembly files
-# (not required if .c is compiled directly to .o)
-#$(OBJDIR)/%.s:	$(SRCDIR)/%.c
-#	$(LCC) $(LCCFLAGS) $(CFLAGS) -S -o $@ $<
-
 # Link the compiled object files into a .gb ROM file
 $(BINS):	$(OBJS) 
 	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(GENDIR) -o $(BINDIR)/$(PROJECTNAME).$(EXT) $(OBJS) $(GENSOURCES)
-
 
 prepare:
 	mkdir -p $(OBJDIR)

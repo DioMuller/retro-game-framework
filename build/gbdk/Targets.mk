@@ -6,7 +6,7 @@ endif
 endif
 
 # Called by the individual targets below to build a ROM
-build-target: 
+build-target:
 	$(BINS)
 
 clean-target:
@@ -17,10 +17,12 @@ clean-target:
 build-gb-clean:
 	${MAKE} clean-target EXT=gb
 build-gb:
-	${MAKE} build-target PORT=sm83 PLAT=gb EXT=gb SPRITES=gb
+	${MAKE} create-assets EXT=gb
+#	${MAKE} build-target PORT=sm83 PLAT=gb EXT=gb SPRITES=gb
 
 
 build-gbc-clean:
 	${MAKE} clean-target EXT=gbc
 build-gbc:
-	${MAKE} build-target PORT=sm83 PLAT=gb EXT=gbc SPRITES=gbc
+	${MAKE} create-assets EXT=gbc
+#	${MAKE} build-target PORT=sm83 PLAT=gb EXT=gbc SPRITES=gbc
