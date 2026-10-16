@@ -1,6 +1,6 @@
 #include <gb/gb.h>
 
-void waitForNextFrame() 
+void wait_for_next_frame() 
 {
     vsync();
 }

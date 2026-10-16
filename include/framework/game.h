@@ -1,6 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-void waitForNextFrame();
+void wait_for_next_frame();
 
 #endif // GAME_H
