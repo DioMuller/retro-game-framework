@@ -17,7 +17,14 @@ LCC = $(CURDIR)/tools/sdk/gbdk/bin/lcc
 
 # Directory Definitions
 SRCDIR      	= src
-INCDIR	  		= include
+PLATSRCDIR     	= src/platform/$(EXT)
+FWSRCDIR		= src/framework
+GBDKSRCDIR		= src/platform/gbdk
+
+INCDIR	  		= include/framework
+GBDKINCDIR	 	= include/platform/gbdk
+PLATINCDIR		= include/platform/$(EXT)
+
 DISTDIR     	= dist
 GENDIR      	= gen/$(EXT)
 OBJDIR      	= obj/$(EXT)
@@ -29,8 +36,11 @@ MKDIRS      	= $(OBJDIR) $(BINDIR)
 BINS	    	= $(PROJECT_NAME).$(EXT)
 ASSETSOURCES 	= $(foreach dir,$(GENDIR),$(notdir $(wildcard $(dir)/*.c))) 
 CSOURCES    	= $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.c))) 
+FWSOURCES    	= $(foreach dir,$(FWSRCDIR),$(notdir $(wildcard $(dir)/*.c)))
+GBDKSOURCES    	= $(foreach dir,$(GBDKSRCDIR),$(notdir $(wildcard $(dir)/*.c)))
+PLATSOURCES    	= $(foreach dir,$(PLATSRCDIR),$(notdir $(wildcard $(dir)/*.c)))
 ASMSOURCES  	= $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.s)))
-OBJS       		= $(ASSETSOURCES:%.c=$(OBJDIR)/%.o) $(CSOURCES:%.c=$(OBJDIR)/%.o) $(ASMSOURCES:%.s=$(OBJDIR)/%.o)
+OBJS       		= $(ASSETSOURCES:%.c=$(OBJDIR)/%.o) $(CSOURCES:%.c=$(OBJDIR)/%.o) $(FWSOURCES:%.c=$(OBJDIR)/%.o) $(GBDKSOURCES:%.c=$(OBJDIR)/%.o) $(PLATSOURCES:%.c=$(OBJDIR)/%.o) $(ASMSOURCES:%.s=$(OBJDIR)/%.o)
 
 # Configure platform specific LCC flags here:
 LCCFLAGS_gb      = -Wm-ys -Wl-yt0x1B -autobank # Set an MBC for banking (1B-ROM+MBC5+RAM+BATT)
@@ -48,9 +58,21 @@ $(OBJDIR)/%.o:	$(GENDIR)/tiles/%.c
 
 # Compile .c files in "src/" to .o object files
 $(OBJDIR)/%.o:	$(SRCDIR)/%.c 
-	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(INCDIR) -I$(GENDIR) -Ires -c -o $@ $<
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(INCDIR) -I$(GBDKINCDIR) -I$(PLATINCDIR) -I$(GENDIR) -Ires -c -o $@ $<
 
-# Compile .s assembly files in "src/" to .o object files
+# Compile .c files in "src/framework" to .o object files
+$(OBJDIR)/%.o:	$(FWSRCDIR)/%.c 
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(INCDIR) -I$(GBDKINCDIR) -I$(PLATINCDIR) -I$(GENDIR) -Ires -c -o $@ $<
+
+# Compile .c files in "src/platform/gbdk" to .o object files
+$(OBJDIR)/%.o:	$(GBDKSRCDIR)/%.c 
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(INCDIR) -I$(GBDKINCDIR) -I$(PLATINCDIR) -I$(GENDIR) -Ires -c -o $@ $<
+
+# Compile .c files in "src/platform/EXT" to .o object files
+$(OBJDIR)/%.o:	$(PLATSRCDIR)/%.c 
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(INCDIR) -I$(GBDKINCDIR) -I$(PLATINCDIR) -I$(GENDIR) -Ires -c -o $@ $<
+
+# Compile .s assembly files in "src" to .o object files
 $(OBJDIR)/%.o:	$(SRCDIR)/%.s
 	$(LCC) $(LCCFLAGS) $(CFLAGS) -c -o $@ $<
 

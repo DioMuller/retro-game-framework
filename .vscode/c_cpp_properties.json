@@ -4,7 +4,10 @@
         {
             "name": "Game Boy",
             "includePath": [
-                "${workspaceFolder}/include",
+                "${workspaceFolder}/include/framework",
+                "${workspaceFolder}/include/platform/gb",
+                "${workspaceFolder}/include/platform/gbdk",
+                "${workspaceFolder}/gen/gb",
                 "${workspaceFolder}/tools/sdk/gbdk/include"
             ],
             "defines": [],
@@ -15,7 +18,10 @@
         {
             "name": "Game Boy Color",
             "includePath": [
-                "${workspaceFolder}/include",
+                "${workspaceFolder}/include/framework",
+                "${workspaceFolder}/include/platform/gb",
+                "${workspaceFolder}/include/platform/gbdk",
+                "${workspaceFolder}/gen/gbc",
                 "${workspaceFolder}/tools/sdk/gbdk/include"
             ],
             "defines": [],
