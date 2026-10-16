@@ -5,8 +5,7 @@
 int main()
 {
 
-    load_tileset(0, 4, SampleTile_tiles);
-    // draw_tiles(0, 0, 8, 8, );
+    load_tileset(0, 4, SampleTile_tiles);    
     commit_framebuffer();
     
     while(1)

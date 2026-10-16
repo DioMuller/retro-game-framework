@@ -9,9 +9,9 @@
                 "${workspaceFolder}/include/platform/gbdk",
                 "${workspaceFolder}/gen/gb",
                 "${workspaceFolder}/tools/sdk/gbdk/include"
-            ],
+            ],        
             "defines": [],
-            "compilerPath": "",
+            "compilerPath": "${workspaceFolder}/tools/sdk/gbdk/bin/lcc",
             "cStandard": "c89",
             "intelliSenseMode": "gcc-x86"
         },

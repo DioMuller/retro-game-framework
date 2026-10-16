@@ -20,12 +20,13 @@ SRCDIR      	= src
 PLATSRCDIR     	= src/platform/$(EXT)
 FWSRCDIR		= src/framework
 GBDKSRCDIR		= src/platform/gbdk
+SPRITESDIR		= gen/$(EXT)/sprites
+TILESDIR		= gen/$(EXT)/tiles
 
 INCDIR	  		= include/framework
 GBDKINCDIR	 	= include/platform/gbdk
 PLATINCDIR		= include/platform/$(EXT)
 
-DISTDIR     	= dist
 GENDIR      	= gen/$(EXT)
 OBJDIR      	= obj/$(EXT)
 
@@ -40,7 +41,9 @@ FWSOURCES    	= $(foreach dir,$(FWSRCDIR),$(notdir $(wildcard $(dir)/*.c)))
 GBDKSOURCES    	= $(foreach dir,$(GBDKSRCDIR),$(notdir $(wildcard $(dir)/*.c)))
 PLATSOURCES    	= $(foreach dir,$(PLATSRCDIR),$(notdir $(wildcard $(dir)/*.c)))
 ASMSOURCES  	= $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.s)))
-OBJS       		= $(ASSETSOURCES:%.c=$(OBJDIR)/%.o) $(CSOURCES:%.c=$(OBJDIR)/%.o) $(FWSOURCES:%.c=$(OBJDIR)/%.o) $(GBDKSOURCES:%.c=$(OBJDIR)/%.o) $(PLATSOURCES:%.c=$(OBJDIR)/%.o) $(ASMSOURCES:%.s=$(OBJDIR)/%.o)
+SPRITESOURCES	= $(foreach dir,$(SPRITESDIR),$(notdir $(wildcard $(dir)/*.c)))
+TILESSOURCES	= $(foreach dir,$(TILESDIR),$(notdir $(wildcard $(dir)/*.c)))
+OBJS       		= $(ASSETSOURCES:%.c=$(OBJDIR)/%.o) $(CSOURCES:%.c=$(OBJDIR)/%.o) $(FWSOURCES:%.c=$(OBJDIR)/%.o) $(GBDKSOURCES:%.c=$(OBJDIR)/%.o) $(PLATSOURCES:%.c=$(OBJDIR)/%.o) $(SPRITESOURCES:%.c=$(OBJDIR)/%.o) $(TILESSOURCES:%.c=$(OBJDIR)/%.o) $(ASMSOURCES:%.s=$(OBJDIR)/%.o)
 
 # Configure platform specific LCC flags here:
 LCCFLAGS_gb      = -Wm-ys -Wl-yt0x1B -autobank # Set an MBC for banking (1B-ROM+MBC5+RAM+BATT)
@@ -50,27 +53,27 @@ LCCFLAGS += -Wl-j -Wm-yoA -Wm-ya4 -Wb-ext=.rel $(LCCFLAGS_$(EXT)) # This adds th
 
 # Compile .c files in "sprites" to .o object files
 $(OBJDIR)/%.o:	$(GENDIR)/sprites/%.c 
-	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(GENDIR) -Ires -c -o $@ $<
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(GENDIR) -c -o $@ $<
 
 # Compile .c files in "sprites" to .o object files
 $(OBJDIR)/%.o:	$(GENDIR)/tiles/%.c 
-	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(GENDIR) -Ires -c -o $@ $<
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(GENDIR) -c -o $@ $<
 
 # Compile .c files in "src/" to .o object files
 $(OBJDIR)/%.o:	$(SRCDIR)/%.c 
-	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(INCDIR) -I$(GBDKINCDIR) -I$(PLATINCDIR) -I$(GENDIR) -Ires -c -o $@ $<
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(INCDIR) -I$(GBDKINCDIR) -I$(PLATINCDIR) -I$(GENDIR) -c -o $@ $<
 
 # Compile .c files in "src/framework" to .o object files
 $(OBJDIR)/%.o:	$(FWSRCDIR)/%.c 
-	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(INCDIR) -I$(GBDKINCDIR) -I$(PLATINCDIR) -I$(GENDIR) -Ires -c -o $@ $<
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(INCDIR) -I$(GBDKINCDIR) -I$(PLATINCDIR) -I$(GENDIR) -c -o $@ $<
 
 # Compile .c files in "src/platform/gbdk" to .o object files
 $(OBJDIR)/%.o:	$(GBDKSRCDIR)/%.c 
-	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(INCDIR) -I$(GBDKINCDIR) -I$(PLATINCDIR) -I$(GENDIR) -Ires -c -o $@ $<
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(INCDIR) -I$(GBDKINCDIR) -I$(PLATINCDIR) -I$(GENDIR) -c -o $@ $<
 
 # Compile .c files in "src/platform/EXT" to .o object files
 $(OBJDIR)/%.o:	$(PLATSRCDIR)/%.c 
-	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(INCDIR) -I$(GBDKINCDIR) -I$(PLATINCDIR) -I$(GENDIR) -Ires -c -o $@ $<
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(INCDIR) -I$(GBDKINCDIR) -I$(PLATINCDIR) -I$(GENDIR) -c -o $@ $<
 
 # Compile .s assembly files in "src" to .o object files
 $(OBJDIR)/%.o:	$(SRCDIR)/%.s

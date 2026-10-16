@@ -1,6 +1,16 @@
 #include "graphics.h"
 #include <gb/gb.h>
 
+void disable_drawing()
+{
+    DISPLAY_OFF;
+}
+
+void enable_drawing()
+{
+    DISPLAY_ON;
+}
+
 void load_tileset(platform_size_t start, platform_size_t size, const byte_t *data)
 {
     set_bkg_data(start, size, data);
