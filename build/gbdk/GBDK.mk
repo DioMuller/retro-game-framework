@@ -26,7 +26,7 @@ BINDIR      	= bin/$(EXT)
 MKDIRS      	= $(OBJDIR) $(BINDIR)
 
 # Build Definitions
-BINS	    	= $(PROJECTNAME).$(EXT)
+BINS	    	= $(PROJECT_NAME).$(EXT)
 ASSETSOURCES 	= $(foreach dir,$(GENDIR),$(notdir $(wildcard $(dir)/*.c))) 
 CSOURCES    	= $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.c))) 
 ASMSOURCES  	= $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.s)))
@@ -56,7 +56,7 @@ $(OBJDIR)/%.o:	$(SRCDIR)/%.s
 
 # Link the compiled object files into a .gb ROM file
 $(BINS):	$(OBJS) 
-	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(GENDIR) -o $(BINDIR)/$(PROJECTNAME).$(EXT) $(OBJS)
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -I$(GENDIR) -o $(BINDIR)/$(PROJECT_NAME).$(EXT) $(OBJS)
 
 
 # Include available build targets

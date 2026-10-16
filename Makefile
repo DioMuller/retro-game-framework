@@ -1,6 +1,12 @@
 # You can set the name of the .gb ROM file here
-PROJECTNAME :=	game
+
+ifeq ($(strip $(PROJECT_NAME)),)
+PROJECT_NAME :=	test_game
+endif
+
+ifeq ($(strip $(TARGETS)),)
 TARGETS 	:=	gb gbc
+endif
 
 # Include GBDK build targets
 include build/gbdk/GBDK.mk

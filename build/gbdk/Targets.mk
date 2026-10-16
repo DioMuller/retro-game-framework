@@ -16,12 +16,12 @@ clean-target:
 build-gb-clean:
 	${MAKE} clean-target EXT=gb
 build-gb:
-	$(CURDIR)/scripts/sdk/gbdk/create_assets.sh $(EXT)
+	$(CURDIR)/scripts/sdk/gbdk/create_assets.sh gb
 	${MAKE} build-target PORT=sm83 PLAT=gb EXT=gb SPRITES=gb
 
 
 build-gbc-clean:
 	${MAKE} clean-target EXT=gbc
 build-gbc:
-	$(CURDIR)/scripts/sdk/gbdk/create_assets.sh $(EXT)
+	$(CURDIR)/scripts/sdk/gbdk/create_assets.sh gbc
 	${MAKE} build-target PORT=sm83 PLAT=gb EXT=gbc SPRITES=gbc

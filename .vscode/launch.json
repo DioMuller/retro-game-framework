@@ -5,9 +5,10 @@
             "name": "Game Boy (Emulicious)",
             "type": "emulicious-debugger",
             "request": "launch",
-            "preLaunchTask": "make gb",
+            "preLaunchTask": "Build Gameboy",
             "program": "${workspaceFolder}/build/gb/game.gb",
-            "emuliciousPath": "${workspaceFolder}/tools/emulicious",
+            "emuliciousPath": "${workspaceFolder}/tools/emulators/emulicious",
+            "javaPath": "${workspaceFolder}/tools/extras/jdk-27/bin/java",
             "port": 58870,
             "stopOnEntry": false
         },
@@ -15,9 +16,10 @@
             "name": "Game Boy Color (Emulicious)",
             "type": "emulicious-debugger",
             "request": "launch",
-            "preLaunchTask": "make gbc",
+            "preLaunchTask": "Build Gameboy Color",
             "program": "${workspaceFolder}/build/gbc/game.gbc",
-            "emuliciousPath": "${workspaceFolder}/tools/emulicious",
+            "emuliciousPath": "${workspaceFolder}/tools/emulators/emulicious",
+            "javaPath": "${workspaceFolder}/tools/extras/jdk-27/bin/java",
             "port": 58870,
             "stopOnEntry": false
         }
